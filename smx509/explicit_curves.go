@@ -51,8 +51,8 @@ func parseExplicitECParameters(params cryptobyte.String) (elliptic.Curve, error)
 	}
 
 	// Read prime p (field modulus)
-	var p *big.Int
-	if !fieldID.ReadASN1Integer(&p) {
+	p := new(big.Int)
+	if !fieldID.ReadASN1Integer(p) {
 		return nil, errors.New("smx509: failed to read prime field modulus")
 	}
 
@@ -79,8 +79,8 @@ func parseExplicitECParameters(params cryptobyte.String) (elliptic.Curve, error)
 	}
 
 	// 5. Read order n
-	var order *big.Int
-	if !params.ReadASN1Integer(&order) {
+	order := new(big.Int)
+	if !params.ReadASN1Integer(order) {
 		return nil, errors.New("smx509: invalid curve order")
 	}
 
